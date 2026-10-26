@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane stylesheets="@mirror.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fx_5_codealong.MirrorController">
+
+    <!-- TOP: purely decorative art → CSS background-image on a Region (slide 18) -->
+    <top>
+        <StackPane prefHeight="110" styleClass="hero-pane">
+            <VBox alignment="CENTER" spacing="2">
+                <Label styleClass="title-lbl" text="The Mirror of Galadriel" />
+                <Label styleClass="subtitle-lbl" text="Choose a vision below, then bend it to your will" />
+            </VBox>
+        </StackPane>
+    </top>
+
+    <!-- CENTER: the ImageView. ImageView has no border/padding of its own, so it is
+         wrapped in a StackPane (a Region) and the CSS styles the wrapper (slide 15).
+         minWidth/minHeight="0" lets the frame shrink when the window shrinks,
+         which matters once the ImageView's size is bound to it (slide 11). -->
+    <center>
+        <VBox alignment="CENTER" spacing="10">
+            <padding><Insets bottom="8" left="16" right="8" top="16" /></padding>
+            <StackPane fx:id="frame_pane" minHeight="0" minWidth="0" styleClass="image-wrapper" VBox.vgrow="ALWAYS">
+                <ImageView fx:id="mirror_img" preserveRatio="true" smooth="true" />
+            </StackPane>
+            <Label fx:id="vision_lbl" styleClass="vision-lbl" text="The Mirror is still..." />
+        </VBox>
+    </center>
+
+    <!-- RIGHT: controls. Handlers are public methods with no @FXML (Quick Reference convention). -->
+    <right>
+        <VBox prefWidth="250" spacing="10" styleClass="control-panel">
+            <padding><Insets bottom="16" left="16" right="16" top="16" /></padding>
+
+            <Label styleClass="section-lbl" text="Size" />
+            <CheckBox fx:id="preserve_chk" onAction="#handlePreserveRatio" selected="true" text="Preserve aspect ratio" />
+            <CheckBox fx:id="smooth_chk" onAction="#handleSmooth" selected="true" text="Smooth scaling" />
+
+            <Separator />
+            <Label styleClass="section-lbl" text="Transform" />
+
+            <HBox spacing="6">
+                <Label text="Rotate" />
+                <Label fx:id="rotate_lbl" styleClass="value-lbl" text="0°" />
+            </HBox>
+            <Slider fx:id="rotate_slider" blockIncrement="15" majorTickUnit="90" max="360" min="0" showTickMarks="true" value="0" />
+
+            <HBox spacing="6">
+                <Label text="Opacity" />
+                <Label fx:id="opacity_lbl" styleClass="value-lbl" text="1.00" />
+            </HBox>
+            <Slider fx:id="opacity_slider" blockIncrement="0.05" majorTickUnit="0.25" max="1" min="0" showTickMarks="true" value="1" />
+
+            <CheckBox fx:id="flip_chk" onAction="#handleFlip" text="Flip horizontally" />
+            <CheckBox fx:id="grayscale_chk" onAction="#handleGrayscale" text="Grayscale" />
+
+            <Separator />
+            <Button fx:id="reset_btn" maxWidth="Infinity" onAction="#handleReset" styleClass="primary-btn" text="Reset the Mirror" />
+            <Button fx:id="lost_btn" maxWidth="Infinity" onAction="#handleLostVision" styleClass="danger-btn" text="Summon a lost vision" />
+
+            <Label fx:id="status_lbl" styleClass="status-lbl" wrapText="true" />
+        </VBox>
+    </right>
+
+    <!-- BOTTOM: empty on purpose — the controller fills it with image Buttons in a loop. -->
+    <bottom>
+        <HBox fx:id="thumbs_hbox" alignment="CENTER" spacing="12" styleClass="thumb-strip">
+            <padding><Insets bottom="14" left="16" right="16" top="10" /></padding>
+        </HBox>
+    </bottom>
+</BorderPane>

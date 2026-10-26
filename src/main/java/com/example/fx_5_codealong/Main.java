@@ -1,0 +1,31 @@
+package com.example.fx_5_codealong;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
+
+public class Main extends Application {
+    @Override
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+
+        // Bonus (slide 14 — "branded" images): an image can also be the window icon.
+        // Same recommended pattern: getResource(...).toExternalForm(), guarded against null.
+        URL iconUrl = Main.class.getResource("/images/one_ring.png");
+        if (iconUrl != null) {
+            stage.getIcons().add(new Image(iconUrl.toExternalForm()));
+        }
+
+        stage.setTitle("Mirror of Galadriel!");
+        stage.setMinWidth(820);
+        stage.setMinHeight(600);
+        stage.setScene(scene);
+        stage.show();
+    }
+}

@@ -1,0 +1,162 @@
+/* ==================================================================
+   FX_5 Code-Along — "The Mirror of Galadriel"   (mirror.css)
+   Lothlórien night palette, matching the Quick Reference snippets:
+     night sky      #1B1F3B   (app background)
+     mirror blue    #262C52   (frame / panels)
+     elven gold     #D4AF37   (borders, accents)
+     starlight      #E8E6F0   (text)
+     moonsilver     #A9B0C8   (secondary text)
+     mallorn green  #5E8C61   (success)
+     ember red      #B5473A   (errors / warning button)
+   ================================================================== */
+
+.root {
+    -fx-background-color: #1B1F3B;
+    -fx-font-family: "Georgia";
+    -fx-font-size: 14px;
+    /* Tells the built-in (Modena) theme we're dark, so sliders/checkboxes look right */
+    -fx-base: #262C52;
+    -fx-accent: #D4AF37;
+    -fx-focus-color: #D4AF37;
+    -fx-faint-focus-color: #D4AF3733;
+}
+
+.label,
+.check-box {
+    -fx-text-fill: #E8E6F0;
+}
+
+/* ------------------------------------------------------------------
+   STEP 8a (slide 18) — background image on a Region, no ImageView.
+   Purely decorative + static → CSS is the right tool.
+   NOTE: a url() WITHOUT a leading slash is resolved relative to THIS
+   .css file, so banner.png sits in an images/ folder next to mirror.css.
+   ------------------------------------------------------------------ */
+.hero-pane {
+    -fx-background-image: url("../../../images/banner.png");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}
+
+.title-lbl {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #D4AF37;
+    -fx-effect: dropshadow(gaussian, #000000AA, 6, 0.3, 0, 1);
+}
+
+.subtitle-lbl {
+    -fx-font-size: 14px;
+    -fx-font-style: italic;
+    -fx-text-fill: #A9B0C8;
+}
+
+/* ------------------------------------------------------------------
+   STEP 8b (slides 15-17) — style the WRAPPER pane, not the ImageView.
+   ImageView has no border/padding/background of its own.
+   If you change padding or border-width here, update FRAME_INSET in
+   MirrorController (it's 2 × (padding + border)).
+   ------------------------------------------------------------------ */
+.image-wrapper {
+    -fx-background-color: #262C52;      /* shows through transparent PNGs (try the Ring!) */
+    -fx-border-color: #D4AF37;
+    -fx-border-width: 2px;
+    -fx-padding: 14px;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    -fx-effect: dropshadow(gaussian, #00000099, 18, 0.2, 0, 4);
+    /* No -fx-cursor: hand here — the frame isn't clickable, so it shouldn't look clickable. */
+}
+
+.vision-lbl {
+    -fx-font-size: 16px;
+    -fx-font-style: italic;
+    -fx-text-fill: #A9B0C8;
+}
+
+/* ------------------------------------------------------------------
+   Control panel
+   ------------------------------------------------------------------ */
+.control-panel {
+    -fx-background-color: #262C52;
+    -fx-border-color: transparent transparent transparent #D4AF3766;
+    -fx-border-width: 0 0 0 1px;
+}
+
+.section-lbl {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #D4AF37;
+}
+
+.value-lbl {
+    -fx-text-fill: #D4AF37;
+    -fx-font-weight: bold;
+}
+
+.button {
+    -fx-font-family: "Georgia";
+    -fx-background-radius: 8px;
+    -fx-padding: 8px 12px;
+    -fx-cursor: hand;
+}
+
+.primary-btn {
+    -fx-background-color: #D4AF37;
+    -fx-text-fill: #1B1F3B;
+    -fx-font-weight: bold;
+}
+.primary-btn:hover   { -fx-background-color: #E3C45A; }
+.primary-btn:pressed { -fx-background-color: #B8952A; }
+
+.danger-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: #B5473A;
+    -fx-border-radius: 8px;
+    -fx-text-fill: #E8A79E;
+}
+.danger-btn:hover { -fx-background-color: #B5473A33; }
+
+.status-lbl     { -fx-font-size: 13px; -fx-font-style: italic; }
+.status-success { -fx-text-fill: #8FBF8F; }
+.status-error   { -fx-text-fill: #E8735F; }
+
+/* ------------------------------------------------------------------
+   STEP 8c (slide 17) — clickable image cards: shadow, hand cursor,
+   :hover / :pressed pseudo-classes, rounded corners.
+   ------------------------------------------------------------------ */
+.thumb-strip {
+    -fx-background-color: #151933;
+    -fx-border-color: #D4AF3766 transparent transparent transparent;
+    -fx-border-width: 1px 0 0 0;
+}
+
+.thumb-btn {
+    -fx-background-color: #262C52;
+    -fx-text-fill: #E8E6F0;
+    -fx-font-size: 12px;
+    -fx-padding: 8px;
+    -fx-graphic-text-gap: 6px;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    -fx-border-color: transparent;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, #00000066, 8, 0, 0, 2);
+    -fx-cursor: hand;
+}
+
+.thumb-btn:hover {
+    -fx-opacity: 0.85;
+    -fx-border-color: #D4AF3799;
+}
+
+.thumb-btn:pressed {
+    -fx-translate-y: 1px;
+}
+
+/* Added/removed from Java (showVision) — style classes, not inline styles */
+.thumb-selected {
+    -fx-border-color: #D4AF37;
+    -fx-background-color: #313866;
+}
